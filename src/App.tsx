@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Form from './components/Form/Form';
 import Thankyou from './components/Form/Thankyou';
-import Layout from './components/Layout';
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (

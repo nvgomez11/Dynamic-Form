@@ -1,4 +1,7 @@
 import { Field } from 'formik';
+import { TextInput } from './TextInput';
+import { SelectInput } from './SelectInput';
+import { TextAreaInput } from './TextAreaInput';
 
 enum FormTypes {
 	text = "text",
@@ -10,32 +13,39 @@ enum FormTypes {
 export type FormFieldType = {
 	id: string;
 	type: string;
+	label: string;
 	required?: boolean;
 	placeholder?: string;
-	options?: string[];
+	options?: string[];	
 }
 
-export const FormField = ({ id, type, required }: FormFieldType) => {
+export type FormFieldProps = {
+	field: FormFieldType
+}
 
-	const getElementType = (type: string, options?: string[]) => {
+export const FormField = ({ field }: FormFieldProps) => {
+	const { id, type, label, placeholder, options } = field;
+
+	const getFieldType = (type: FormTypes, options?: string[]) => {
 		switch (type) {
 			case FormTypes.text:
-				return <Field type={FormTypes.text}/>
-			
+				return <TextInput id={id} type={type} label={label} placeholder={placeholder}/>
+
 			case FormTypes.email:
-				return <Field type={FormTypes.email}/>
-				
+				return <TextInput id={id} type={type} label={label} placeholder={placeholder}/>
+
 			case FormTypes.textarea:
-				return <input/>
+				return <TextAreaInput id={id} type={type} label={label} placeholder={placeholder} />				
 
 			case FormTypes.select:
-				return <input/>
+				return (					
+					<SelectInput id={id} type={type} label={label} placeholder={placeholder} options={options}/>						 						
+				)
 		}
 	};
 
 	return(
-	<div key={id}>
-		<h1>hey</h1>		
-	</div>)
+		getFieldType(type as FormTypes, options)
+	)
 };
 

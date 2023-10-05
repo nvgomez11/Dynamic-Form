@@ -2,42 +2,55 @@
   "fields": [
 		[{
 			"id": "firstName",
-			"placeholder": "First name",
+			"placeholder": "Nelson ",
 			"required": true,
-			"type": "text"
+			"type": "text",
+			"label": "First Name"						
 		},
 		{
 			"id": "lastName",
-			"placeholder": "Last name",
+			"placeholder": "Gomez",
 			"required": true,
-			"type": "text"
+			"type": "text",
+			"label": "Last Name"
 		}],
 		{
 			"id": "email",
+			"placeholder": "example@gmail.com",
 			"required": true,
-			"type": "email"
+			"type": "email",
+			"label": "Email"
 		},
 		{
-			"id": "address1",
-			"placeholder": "Address 1",
-			"type": "text"
+			"id": "address",
+			"placeholder": "e.g, 1234 Sunset Blvd",
+			"type": "text",
+			"label": "Address"
 		},
 		[{
 			"id": "city",
-			"type": "text"
+			"placeholder": "e.g, Los Angeles",
+			"type": "text",			
+			"label": "City"
 		},
 		{
 			"id": "state",
-			"type": "text"
+			"placeholder": "California",
+			"type": "text",
+			"label": "State"
 		},
 		{
 			"id": "zip",
-			"type": "text"
+			"placeholder": "Zipcode",
+			"type": "text",
+			"label": "Zip"
 		}],
 		{
 			"id": "phone",
+			"placeholder": "e.g, (555) 123-4567",
 			"required": true,
-			"type": "text"
+			"type": "text",
+			"label": "Phone"
 		},
 		{
 			"id": "jobTitle",
@@ -50,12 +63,14 @@
 				"Engineer - full stack"
 			],
 			"placeholder": "Please select job title",
-			"type": "select"
+			"type": "select",
+			"label": "Job Title"			
 		},
 		{
 			"id": "reason",
 			"placeholder": "Describe why you are a good fit for the job you are applying for.",
-			"type": "textarea"
+			"type": "textarea",
+			"label": "Reason"
 		}
 	]	
 }

@@ -1,7 +1,13 @@
+import styled from "styled-components";
+
 const Header = () => {
 	return(
-		<h1>Header!!</h1>
+		<Container>Dynamic Form</Container>
 	);
 }
 
 export default Header;
+
+const Container = styled.div`
+	width: 100%;
+`;
