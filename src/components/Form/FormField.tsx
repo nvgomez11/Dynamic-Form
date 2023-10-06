@@ -1,4 +1,3 @@
-import { Field } from 'formik';
 import { TextInput } from './TextInput';
 import { SelectInput } from './SelectInput';
 import { TextAreaInput } from './TextAreaInput';
@@ -29,17 +28,42 @@ export const FormField = ({ field }: FormFieldProps) => {
 	const getFieldType = (type: FormTypes, options?: string[]) => {
 		switch (type) {
 			case FormTypes.text:
-				return <TextInput id={id} type={type} label={label} placeholder={placeholder}/>
+				return (
+					<TextInput 
+						id={id} 
+						type={type} 
+						label={label} 
+						placeholder={placeholder} 
+					/>)
 
 			case FormTypes.email:
-				return <TextInput id={id} type={type} label={label} placeholder={placeholder}/>
+				return (
+					<TextInput 
+						id={id} 
+						type={type} 
+						label={label} 
+						placeholder={placeholder} 
+						data-testid="form-field-comp"/>
+					)
 
 			case FormTypes.textarea:
-				return <TextAreaInput id={id} type={type} label={label} placeholder={placeholder} />				
+				return (
+					<TextAreaInput 
+						id={id} 
+						type={type} 
+						label={label} 
+						placeholder={placeholder} 
+						data-testid="form-field-comp"/>)				
 
 			case FormTypes.select:
 				return (					
-					<SelectInput id={id} type={type} label={label} placeholder={placeholder} options={options}/>						 						
+					(<SelectInput 
+						id={id} 
+						type={type} 
+						label={label} 
+						placeholder={placeholder} 
+						options={options} 
+						data-testid="form-field-comp"/>)
 				)
 		}
 	};

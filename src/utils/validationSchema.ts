@@ -27,7 +27,7 @@ export const generateValidationSchema = () => {
 	fieldSet.fields.map((field) => {
 		if(Array.isArray(field)) {
 			return(
-				field.map((subfield) => {					
+				field.map((subfield) => {
 					return schema[subfield.id] = generateValidationValue(subfield);
 				})
 			);

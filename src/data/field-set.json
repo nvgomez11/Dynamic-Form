@@ -29,7 +29,7 @@
 		},
 		[{
 			"id": "city",
-			"placeholder": "e.g, Los Angeles",
+			"placeholder": "e.g, LA",
 			"type": "text",			
 			"label": "City"
 		},
@@ -70,7 +70,7 @@
 			"id": "reason",
 			"placeholder": "Describe why you are a good fit for the job you are applying for.",
 			"type": "textarea",
-			"label": "Reason"
+			"label": "Reason"			
 		}
 	]	
 }

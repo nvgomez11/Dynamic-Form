@@ -2,46 +2,95 @@ import fieldSet from './../../data/field-set.json';
 import { Formik, Form } from 'formik';
 import { generateInitialValues, generateValidationSchema } from '../../utils/validationSchema';
 import { FormField, FormFieldType } from './FormField';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { updateFormField } from '../../redux/reducers/formSlice';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = generateValidationSchema();
 
 const initialValues = generateInitialValues();
 
 const DynamicForm = () => {
-	console.log('Hi, I am validation schema', validationSchema);
-	console.log('Initial Values', initialValues);
-
-	const handleSubmit = (values: any) => { //TODO: watch out any value
-		console.log('Form values are:', values);
+	const navigate = useNavigate();		
+	const dispatch = useDispatch();
+	
+	const handleSubmit = (values: any) => { //TODO: watch out any value		
+		dispatch(updateFormField(values));
+		navigate('/thankyou');		
 	};
 
 	return(
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
 			<Form>
-					{fieldSet?.fields?.map((field) => {						
+				<StyledContainer>
+					{fieldSet?.fields?.map((field, index) => {
 						if(Array.isArray(field)){
 							return(
-								field.map((subfield: FormFieldType) => {									
-								 	return( //TODO: element here should be in-line
-										<div key={`field-${subfield.id}`}>
-											<FormField field={subfield} />																						
-										</div>
-									)
-								})								
-							)												
+								<RowContainer key={`${field}-${index}`}>
+									{field.map((subfield: FormFieldType) => {									
+											return(
+												<FormField field={subfield} key={`field-${subfield.id}`} />
+											)
+									})}
+								</RowContainer>															
+							)											
 						}
 
 						return (
-							<div key={`field-${field.id}`}>
+							<ColumnContainer key={`field-${field.id}`}>
 								<FormField field={field} />
-							</div>
+							</ColumnContainer>
 						)
 					})}
 
-					<button type="submit">Submit</button>
+					<Button type="submit" data-testid="submit-button">Submit</Button>
+
+					<select>
+						<option>Ferrari</option>
+						<option>Hey</option>
+					</select>
+				</StyledContainer>
 			</Form>			
 		</Formik>
 	);
 }
 
 export default DynamicForm;
+
+const StyledContainer = styled.div`
+	@media (min-width: 768px) {
+		display: flex;
+		flex-direction: column;
+		width: 768px;
+		margin: 0 auto;
+	}
+`;
+
+export const RowContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	max-width: 100%;
+	margin-bottom: ${(props) => props.theme.spacing.medium};
+`;
+
+export const ColumnContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	max-width: 100%;
+	margin-bottom: ${(props) => props.theme.spacing.medium};
+`
+
+const Button = styled.button`
+	background-color: white;
+	border: 2px solid white;
+	border-radius: 10px;
+	color: #2d3748;
+	padding: 8px;
+	font-size: ${(props) => props.theme.fontSize.medium};
+	font-weight: ${(props) => props.theme.weight.bold};
+	margin-bottom: 100px;
+	margin-top: 20px;
+`
