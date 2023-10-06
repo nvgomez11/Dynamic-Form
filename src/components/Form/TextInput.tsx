@@ -8,8 +8,16 @@ export const TextInput = ({ label, ...props}: FormFieldType ) => {
 
 	return (
 		<Container data-testid="text-input-comp">
-			<StyledLabel htmlFor={props.id}>{label}</StyledLabel>
-			<StyledInput {...field} {...props}/>
+			<StyledLabel 
+				htmlFor={props.id} 
+				data-testid="text-label"
+			>{label}</StyledLabel>
+			<StyledInput 
+				{...field} 
+				{...props} 
+				aria-required={props.required ? "true" : "false"}
+				data-testid="input-text"
+			/>
 			{meta.touched && meta.error ? (
 				<Error>{meta.error}</Error>
 			) : null}		

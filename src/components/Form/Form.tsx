@@ -21,42 +21,51 @@ const DynamicForm = () => {
 	};
 
 	return(
-		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-			<Form>
-				<StyledContainer>
-					{fieldSet?.fields?.map((field, index) => {
-						if(Array.isArray(field)){
-							return(
-								<RowContainer key={`${field}-${index}`}>
-									{field.map((subfield: FormFieldType) => {									
-											return(
-												<FormField field={subfield} key={`field-${subfield.id}`} />
-											)
-									})}
-								</RowContainer>															
-							)											
-						}
+		<>
+			<StyledTitle>Please fill out the form</StyledTitle>			
+			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+				<Form>
+					<StyledContainer>
+						{fieldSet?.fields?.map((field, index) => {
+							if(Array.isArray(field)){
+								return(
+									<RowContainer key={`${field}-${index}`}>
+										{field.map((subfield: FormFieldType) => {									
+												return(
+													<FormField field={subfield} key={`field-${subfield.id}`} />
+												)
+										})}
+									</RowContainer>															
+								)											
+							}
 
-						return (
-							<ColumnContainer key={`field-${field.id}`}>
-								<FormField field={field} />
-							</ColumnContainer>
-						)
-					})}
+							return (
+								<ColumnContainer key={`field-${field.id}`}>
+									<FormField field={field} />
+								</ColumnContainer>
+							)
+						})}
 
-					<Button type="submit" data-testid="submit-button">Submit</Button>
-
-					<select>
-						<option>Ferrari</option>
-						<option>Hey</option>
-					</select>
-				</StyledContainer>
-			</Form>			
-		</Formik>
+						<Button type="submit" data-testid="submit-button">Submit</Button>
+					</StyledContainer>
+				</Form>			
+			</Formik>
+		</>
 	);
 }
 
 export default DynamicForm;
+
+const StyledTitle = styled.h2`
+	color: ${(props) => props.theme.colors.text};
+	margin-bottom: 30px;
+
+	@media (min-width: 768px) {
+		width: 768px;
+		margin: 0 auto;
+		margin-bottom: 30px;
+	}
+`;
 
 const StyledContainer = styled.div`
 	@media (min-width: 768px) {
@@ -93,4 +102,12 @@ const Button = styled.button`
 	font-weight: ${(props) => props.theme.weight.bold};
 	margin-bottom: 100px;
 	margin-top: 20px;
+	width: 100%
+
+	@media (min-width: 768px) {
+		width: 200px;
+		margin: 0 auto;
+		margin-top: 45px;
+	}
+
 `

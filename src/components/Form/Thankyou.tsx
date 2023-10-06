@@ -4,9 +4,24 @@ import fieldSet from './../../data/field-set.json';
 import { ColumnContainer, RowContainer } from "./Form";
 import { FormFieldType } from "./FormField";
 import styled from "styled-components";
+import { generateInitialValues } from "../../utils/validationSchema";
+import isEqual from 'lodash/isEqual';
+import { Link } from 'react-router-dom';
+
 
 const Thankyou = () => {
 	const formFields = useSelector((state: RootState) => state.form);
+	const initialValues = generateInitialValues();
+
+	const areFieldsEmpty = isEqual(formFields, initialValues);
+
+	if(areFieldsEmpty){
+		return (
+			<StyledLink to="/">
+				<StyledParagraph>No data to show. Please fill out the form</StyledParagraph>
+			</StyledLink>
+		)
+	}
 
   return(
 		<StyledDescriptiveList>
@@ -44,6 +59,27 @@ const Thankyou = () => {
 		</StyledDescriptiveList>
 	)
 }
+
+const StyledLink = styled(Link)`
+	cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const StyledParagraph = styled.p`	
+	color: ${(props) => props.theme.colors.text};
+	margin-bottom: 30px;
+	text-align: center;
+
+	@media (min-width: 768px) {
+		width: 768px;
+		margin: 0 auto;
+		margin-bottom: 30px;
+	}
+`;
 
 const StyledDescriptiveList = styled.dl`
 	@media (min-width: 768px) {

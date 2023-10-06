@@ -76,7 +76,7 @@ describe('FormField Component', () => {
 			</ThemeProvider>
     );
 
-    const inputElement = getByTestId('select-input-comp');
+    const inputElement = getByTestId('select-input-container');
     expect(inputElement).toBeInTheDocument();
   });
 });

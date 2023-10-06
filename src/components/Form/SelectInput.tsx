@@ -7,16 +7,19 @@ export const SelectInput = ({ label, options, ...props}: FormFieldType ) => {
 	const [field, meta] = useField(props.id);
 
 	return (
-		<Container data-testid="select-input-comp">
-			<StyledLabel htmlFor={props.id}>{label}</StyledLabel>
+		<Container data-testid="select-input-container">
+			<StyledLabel htmlFor={props.id} data-testid="select-label">{label}</StyledLabel>
 			<StyledSelect 
 				{...field} 
-				{...props} 
-				aria-labelledby={`${props.id}-label`}
+				{...props}				
+				aria-required={props.required ? 'true' : 'false'}
+				role="listbox" 
+				aria-labelledby={`${props.id}`}
         aria-invalid={meta.touched && !!meta.error}
+				data-testid="select-input"
 			>
 				{options?.map((option, index) => {
-						return <StyledOptions value={option} key={`${option}-${index}`}>{option}</StyledOptions>
+						return <StyledOptions value={option} key={`${option}-${index}`} role="option">{option}</StyledOptions>
 				})}
 			</StyledSelect>
 			{meta.touched && meta.error ? (								

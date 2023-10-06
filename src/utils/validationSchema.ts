@@ -3,7 +3,7 @@ import fieldSet from '../data/field-set.json';
 import { FormFieldType } from '../components/Form/FormField';
 
 
-export const generateValidationValue = ({required, type, label, options }: FormFieldType) => {
+export const generateValidationValue = ({required, type, label, options, id }: FormFieldType) => {
 	let validator = Yup.string();
 
 	if(type === "email") {
@@ -12,6 +12,10 @@ export const generateValidationValue = ({required, type, label, options }: FormF
 
 	if(type === "select" && options) {
 		validator = validator.oneOf(options)
+	}
+
+	if(id=== "phone") {
+		validator = validator.matches(/^\(\d{3}\) \d{3}-\d{4}$/, "Required format: (XXX) XXX-XXXX")
 	}
 
 	if(required) {
